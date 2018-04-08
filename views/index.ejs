@@ -1,0 +1,40 @@
+<!-- LISTING CUSTOMERS WITH EJS VIEW ENGINE -->
+<h3>Customers</h3>
+<ul>
+<% customers.forEach(function(customer){ %>
+    <li>
+        <h4><%= customer.value.name %></h4>
+        <p><b>customer id:</b> <%= customer.key %></p>
+        <%= customer.value.email %>
+        <% if(customer.value.address) { %>
+        <ul>
+            <li><%= customer.value.address.street %></li>
+            <li><%= customer.value.address.city %></li>
+            <li><%= customer.value.address.state %></li>
+        </ul>
+        <% } %>
+        <!-- DELETE THIS CUSTOMER -->
+        <form method="post" action="/customer/delete/<%= customer.key %>">
+            <input type="hidden" value="<%= customer.value.rev %>" name="rev">
+            <input type="submit" value="remove">
+        </form>
+    </li>
+<% }); %>
+</ul>
+
+<!-- ADDING CUSTOMERS (action = route where we want to submit to) -->
+<h3>Add Customer</h3>
+<form method="post" action="/customer/add">
+    <input type="text" name="name" placeholder="Add Name">
+    <input type="text" name="email" placeholder="Add Email">
+    <input type="submit" value="Submit">
+</form>
+
+<!-- UPDATE CUSTOMERS -->
+<h3>Edit a customer</h3>
+<form method="post" action="/customer/update">
+    <input type="text" name="customerID" placeholder="Enter Customer ID">
+    <input type="text" name="name" placeholder="New Name">
+    <input type="text" name="email" placeholder="New Email">
+    <input type="submit" value="Submit">
+</form>

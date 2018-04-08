@@ -1,0 +1,2 @@
+ejs = embedded javascript, see: http://ejs.co/
+fauxton url: http://localhost:5984/_utils/
